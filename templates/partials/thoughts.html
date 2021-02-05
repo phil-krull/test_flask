@@ -1,0 +1,19 @@
+{% for thought in thoughts %}
+    <div class="col-2">
+        <p><a href="/users/{{ thought.user_id }}">{{ thought.user_name }}</a> says:</p>
+    </div>
+    <div class="col-8">
+        <p class="p-2 border border-dark my-2">{{ thought.thought }}</p>
+        {% if user not in thought.user_likes %}
+            <a class="btn btn-success btn-sm px-4 update_like" href="/thoughts/{{ thought.id}}/like">Like</a>
+        {% else %}
+            <a class="btn btn-warning btn-sm px-4 update_like" href="/thoughts/{{ thought.id}}/unlike">Unlike</a>
+        {% endif %}
+        <p class="float-right">{{ thought.num_of_likes }} people like this</p>
+    </div>
+    <div class="col-2">
+        {% if thought.user_id == user %}
+            <a class="delete_thought" href="/thoughts/{{ thought.id }}/delete">Delete</a>
+        {% endif %}
+    </div>
+{% endfor %}
